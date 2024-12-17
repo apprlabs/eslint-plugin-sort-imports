@@ -14,14 +14,11 @@ jobs:
     name: CI
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - uses: ./.github/workflows/setup.yaml
+      - uses: apprlabs/eslint-plugin-sort-imports/.github/workflows/setup.yaml@dev
         with:
           node-version: ${{ env.node-version }}
 
-      - uses: ./.github/workflows/code-quality.yaml
+      - uses: apprlabs/eslint-plugin-sort-imports/.github/workflows/code-quality.yaml@dev
 
       - name: Prepare coverage report in markdown
         uses: fingerprintjs/action-coverage-report-md@v2
