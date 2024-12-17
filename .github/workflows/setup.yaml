@@ -1,0 +1,21 @@
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        default: 22
+        description: The version of node to set up
+        type: number
+        required: false
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    name: Setup Environment
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
