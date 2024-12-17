@@ -32,17 +32,23 @@ jobs:
         run: npm run lint
 
       - name: Test
-        run: npm run test -- --coverage
+        run: npm run test
 
       - name: Build
         run: npm run build
+
+      - name: Prepare coverage report in markdown
+        uses: fingerprintjs/action-coverage-report-md@v2
+        id: coverage
 
       - name: Publish coverage report
         if: github.event_name == 'pull_request'
         uses: marocchino/sticky-pull-request-comment@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           header: Code Coverage
-          message: |
-            ```
-            $(cat coverage/lcov-report/index.html | tail -n +1)
+          message: ${{ steps.coverage.outputs.markdownReport }}
+
+      - name: Add coverage report to the job summary
+        run: |
+          echo "## Code Coverage" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.coverage.outputs.markdownReport }}" >> $GITHUB_STEP_SUMMARY
