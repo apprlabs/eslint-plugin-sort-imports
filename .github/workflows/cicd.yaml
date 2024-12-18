@@ -67,6 +67,8 @@ jobs:
           fi
           echo "Releasing new version: $CURRENT_VERSION"
           echo "version=$CURRENT_VERSION" >> "${GITHUB_OUTPUT}"
+      - name: Debug
+        run: echo ${{ steps.version-check.outputs.version }}
 
   cd:
     needs: ci
