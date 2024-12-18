@@ -13,6 +13,8 @@ jobs:
   ci:
     name: CI
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version-check.outputs.version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -73,9 +75,9 @@ jobs:
   cd:
     needs: ci
     runs-on: ubuntu-latest
-    if: ${{ needs.ci.steps.version-check.outputs.version != '' }}
+    if: ${{ needs.ci.outputs.version != '' }}
     env:
-      version: ${{ needs.ci.steps.version-check.outputs.version }}
+      version: ${{ needs.ci.outputs.version }}
     steps:
       - name: Generate changelog entries
         run: |
