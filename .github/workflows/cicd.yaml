@@ -65,6 +65,7 @@ jobs:
             echo "Version did not change. Skipping CD job."
             exit 0
           fi
+          echo "Releasing new version: $CURRENT_VERSION"
           echo "version=$CURRENT_VERSION" >> "${GITHUB_OUTPUT}"
 
   cd:
