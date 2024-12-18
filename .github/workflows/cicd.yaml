@@ -79,6 +79,11 @@ jobs:
     env:
       version: ${{ needs.ci.outputs.version }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Generate changelog entries
         run: |
           npx conventional-changelog-cli -p angular -i CHANGELOG.md -s -r 1
