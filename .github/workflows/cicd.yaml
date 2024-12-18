@@ -68,9 +68,9 @@ jobs:
   cd:
     needs: ci
     runs-on: ubuntu-latest
-    if: ${{ ci.steps.version-check.outputs.version != '' }}
+    if: ${{ needs.ci.steps.version-check.outputs.version != '' }}
     env:
-      version: ${{ ci.steps.version-check.outputs.version }}
+      version: ${{ needs.ci.steps.version-check.outputs.version }}
     steps:
       - name: Generate changelog entries
         run: |
