@@ -57,6 +57,7 @@ jobs:
         if: github.event_name == 'push'
         id: version-check
         run: |
+          which jq
           CURRENT_VERSION=$(jq -r .version package.json)
           LAST_TAG=$(git describe --tags --abbrev=0 || echo "v0.0.0")
           if [ "$CURRENT_VERSION" == "${LAST_TAG#v}" ]; then
