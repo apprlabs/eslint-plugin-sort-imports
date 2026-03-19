@@ -1,3 +1,4 @@
+## [0.0.3](https://github.com/apprlabs/eslint-plugin-sort-imports/compare/v0.0.1...v0.0.3) (2026-03-19)
 # Changelog
 
 All notable changes to this project will be documented in this file.
